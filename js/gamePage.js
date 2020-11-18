@@ -1,0 +1,2 @@
+// game page js code
+
