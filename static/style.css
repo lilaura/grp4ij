@@ -32,6 +32,19 @@
   	margin: 4px 2px;
   	cursor: pointer;
 }
+.buttonMenu {
+	background-color: CornflowerBlue;
+  	border: none;
+  	color: white;
+  	padding: 10px 16px;
+    border-radius: 5px;
+  	text-align: center;
+  	text-decoration: none;
+ 	display: inline-block;
+  	font-size: 13px;
+  	margin: 2px 1px;
+  	cursor: pointer;
+}
 .rules {
 	border: 1px blue;
 	background-color: rgba(3, 88, 153, 0.7);
