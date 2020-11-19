@@ -1,5 +1,12 @@
-html { 
+.title { 
     background: url(../asset/titleFrostpipe.jpeg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+.backg { 
+    background: url(../asset/frostpunkBackground.jpeg) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -24,4 +31,13 @@ html {
   	font-size: 16px;
   	margin: 4px 2px;
   	cursor: pointer;
+}
+.rules {
+	border: 1px blue;
+	background-color: lightskyblue;
+	/*opacity: 0.5;*/
+	color: white;
+	padding: 20px;
+	margin: 50px;
+	text-align: center;
 }
