@@ -41,3 +41,30 @@
 	margin: 50px;
 	text-align: center;
 }
+.topPanel {
+	width: 100%;
+	height: 15vh;
+	background-color: lightgray;
+	text-align: center
+}
+.house {
+	/*text-align: center;*/
+
+	display: inline-block;
+	height:100%;
+	width: 200px;
+	background-color: BurlyWood;
+}
+divLine {
+	display: block;
+	height: 2px;
+	border: 0;
+	border-top: 2px solid #BBBBBB;
+}
+.gameBoard {
+	height: 85vh;
+	/*min-height: calc(100vh -100px);*/
+	background-color: darkgray;
+	width:100%;
+	/*position: relative;*/
+}
