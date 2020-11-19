@@ -34,7 +34,7 @@
 }
 .rules {
 	border: 1px blue;
-	background-color: lightskyblue;
+	background-color: rgba(3, 88, 153, 0.7);
 	/*opacity: 0.5;*/
 	color: white;
 	padding: 20px;
@@ -67,4 +67,8 @@ divLine {
 	background-color: darkgray;
 	width:100%;
 	/*position: relative;*/
+}
+
+p{
+	font-size: 20px;;
 }
