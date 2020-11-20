@@ -66,7 +66,7 @@
 	display: inline-block;
 	height:100%;
 	width: 200px;
-	background-color: BurlyWood;
+	
 }
 divLine {
 	display: block;
@@ -85,3 +85,44 @@ divLine {
 p{
 	font-size: 20px;;
 }
+
+#house{
+	display: inline-block;
+	height:100%;
+	margin-left: -100px; 
+    
+}
+
+#central{
+	position: absolute;
+   top: 50%;
+   left: 570px;
+   width:350px; 
+   
+   margin-top: -100px;
+}
+
+.pump{
+	width: 70px;
+	margin-right:-10px;
+	margin-top: 5px;
+	position: relative;
+	top:-16px;
+}
+.pipe0{
+	width:90px;
+	margin:-2px;
+	
+}
+
+#set1{
+
+  position: absolute;
+  top: 50%;
+  left: 20px; 
+overflow: hidden;
+width:1000px
+  
+}
+
+
