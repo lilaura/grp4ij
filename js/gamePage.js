@@ -1,5 +1,8 @@
 // game page js code
 let pipeIdx = 1;
+let existAP = false;
+let haveCurrAct = false;
+let currActTime = 0;
 
 var state = [];
 for (var n = 0; n < 6; ++n) {
@@ -34,7 +37,7 @@ function createItemDivString(itemIndex, type, imageString) {
     itemIndex +
     "'class='pipe0'" +
     "alt='horizontal pipe'" +
-    "/>"
+    "onClick='gameAction(this.id)'/>"
   );
 }
 
@@ -78,13 +81,15 @@ function checkleaking() {
       ice.css('height',85);
       ice.css("z-index",11);
       leak.remove();
+      // console.log("#smallice" + idx)
+      console.log(leak)
     }
     if (state[idx - 1] == 2 && change == false) {
       change = true;
       state[idx - 1] = 3;
-      var img = createItemDivString(idx, "largeice", "lg-ice.png");
+      var img = createItemDivString(idx, "bigice", "lg-ice.png");
       $("body").append(img);
-      let ice = $("#largeice" + idx);
+      let ice = $("#bigice" + idx);
       let smice = $("#smallice" + idx);
       ice.css("position", "absolute");
       ice.css("left", left[idx-1]);
@@ -93,5 +98,143 @@ function checkleaking() {
       ice.css("z-index",12);
       smice.remove();
     }
+    if (state[idx - 1] == 4 && change == false) {
+      let undoCoat = Math.random();
+      if (undoCoat > 0.75) {
+        change = true;
+        state[idx - 1] = 0;
+        let coat = $("#coat" + idx);
+        coat.remove();
+      }
+    }
   }
+}
+function createActionPanel(type, actID) {
+  if (type == 'l') {
+    return (
+      "<div id='actionPanel'> <button id='" + actID + 
+      "'class='action1' onClick='actionReplace(this.id)'> replace </button>" +
+      " <button id='" + actID + 
+      "'class='action1'' onClick='actionCover(this.id)'> cover </button></div>"
+    )
+  }
+  else if (type == 's') {
+    return (
+      "<div id='actionPanel'> <button id='" + actID + 
+      "'class='action1' onClick='actionReplace(this.id)'> replace </button>" +
+      " <button id='" + actID + 
+      "'class='action1'' onClick='actionMelt(this.id)'> melt </button></div>"
+    )
+  }
+  if (type == 'b') {
+    return (
+      "<div id='actionPanel'> <button id='" + actID + 
+      "'class='action1' onClick='actionReplace(this.id)'> replace </button>" +
+      " <button id='" + actID + 
+      "'class='action1'' onClick='actionMelt(this.id)'> melt </button></div>"
+    )
+  }
+}
+function gameAction(actionID) {
+  // if 
+  if (existAP == false) {
+    existAP = true;
+  } else {
+    let prevAP = $("#actionPanel")
+    prevAP.remove();
+    // console.log("removed");
+  }
+  let type = actionID.charAt(0);
+  let idx = parseInt(actionID.charAt(actionID.length-1))
+  // console.log(idx)
+  // console.log(type);
+  let ap = createActionPanel(type,actionID);
+  $("body").append(ap);
+  var left = [83,172,262,352,444,532]
+  // let currAP = $("#actionPanel");
+  // currAP.css("top",305);
+  // currAP.css("left", left[idx-1]);
+
+}
+
+function actionReplace(actionID) {
+  let actionPanel = $("#actionPanel");
+  actionPanel.remove()
+  let idx = actionID.charAt(actionID.length-1)
+  let type = actionID.charAt(0);
+  var left = [83,172,262,352,444,532];
+  let currState = $("#"+actionID);
+  // console.log()
+  console.log(currState)
+  // add curr action thing here
+  currState.remove();
+  console.log("fixed");
+  state[idx-1]=0;
+}
+
+function addCover(type, itemIndex) {
+  return (
+    "<img src='asset/pipe-state/coat.png" + 
+    "'id='" +
+    type +
+    itemIndex +
+    "'class='pipe0'" +
+    "alt='horizontal pipe'" +
+    "onClick='gameAction(this.id)'/>"
+  );
+}
+
+function actionCover(actionID) {
+  let actionPanel = $("#actionPanel");
+  actionPanel.remove()
+  var left = [83,172,262,352,444,532]
+  let idx = parseInt(actionID.charAt(actionID.length-1))
+  let type = "coat";
+  let currState = $("#"+actionID);
+  // currState.remove();
+  let cov = addCover(type,idx);
+  $("body").append(cov);
+  let cover = $("#coat" + idx);
+  cover.css("position", "absolute");
+  cover.css("left",left[idx-1]);
+  cover.css("top", 350);
+  cover.css('height',85);
+  cover.css("z-index",11);
+  currState.remove()
+  state[idx-1]=4;
+}
+
+function actionMelt(actionID) {
+  let actionPanel = $("#actionPanel");
+  actionPanel.remove()
+  var left = [83,172,262,352,444,532]
+  let idx = parseInt(actionID.charAt(actionID.length-1))
+  if (state[idx - 1] == 2) {
+      state[idx - 1] = 1;
+      var img = createItemDivString(idx, "leak", "drip.png");
+      $("body").append(img);
+      let ice = $("#smallice" + idx);
+      let leak = $("#leak" + idx);
+      leak.css("position", "absolute");
+      leak.css("left",left[idx-1]);
+      leak.css("top", 358);
+      leak.css('height',73);
+      leak.css("z-index",12);
+      ice.remove();
+      // console.log("#smallice" + idx)
+      // console.log(leak)
+    }
+    if (state[idx - 1] == 3) {
+      state[idx - 1] = 2;
+      var img = createItemDivString(idx, "smallice", "sm-ice.png");
+      $("body").append(img);
+      let ice = $("#smallice" + idx);
+      let bigice = $("#bigice" + idx);
+      ice.css("position", "absolute");
+      ice.css("left", left[idx-1]);
+      ice.css("top", 350);
+      ice.css('height',85);
+      ice.css("z-index",11);
+      bigice.remove();
+    }
 }
