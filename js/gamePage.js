@@ -3,6 +3,7 @@ let pipeIdx = 1;
 let existAP = false;
 let haveCurrAct = false;
 let currActTime = 0;
+let actionPanelOpen = false;
 
 var state = [];
 for (var n = 0; n < 6; ++n) {
@@ -66,6 +67,11 @@ function checkleaking() {
         leak.css("left", left[idx-1]);
         leak.css("z-index",10);
         // leak.css("top", parseInt(tube.css("top")));
+        if (actionPanelOpen) {
+          let actionPanel = $("#actionPanel");
+          actionPanel.remove();
+          actionPanelOpen = false;
+        }
       }
     }
     if (state[idx - 1] == 1 && change == false) {
@@ -82,7 +88,11 @@ function checkleaking() {
       ice.css("z-index",11);
       leak.remove();
       // console.log("#smallice" + idx)
-      console.log(leak)
+      if (actionPanelOpen) {
+        let actionPanel = $("#actionPanel");
+        actionPanel.remove();
+        actionPanelOpen = false;
+      }
     }
     if (state[idx - 1] == 2 && change == false) {
       change = true;
@@ -97,6 +107,11 @@ function checkleaking() {
       ice.css('height',73);
       ice.css("z-index",12);
       smice.remove();
+      if (actionPanelOpen) {
+        let actionPanel = $("#actionPanel");
+        actionPanel.remove();
+        actionPanelOpen = false;
+      }
     }
     if (state[idx - 1] == 4 && change == false) {
       let undoCoat = Math.random();
@@ -105,6 +120,11 @@ function checkleaking() {
         state[idx - 1] = 0;
         let coat = $("#coat" + idx);
         coat.remove();
+        if (actionPanelOpen) {
+          let actionPanel = $("#actionPanel");
+          actionPanel.remove();
+          actionPanelOpen = false;
+        }
       }
     }
   }
@@ -137,6 +157,7 @@ function createActionPanel(type, actID) {
 }
 function gameAction(actionID) {
   // if 
+  actionPanelOpen = true;
   if (existAP == false) {
     existAP = true;
   } else {
@@ -159,7 +180,8 @@ function gameAction(actionID) {
 
 function actionReplace(actionID) {
   let actionPanel = $("#actionPanel");
-  actionPanel.remove()
+  actionPanel.remove();
+  actionPanelOpen = false;
   let idx = actionID.charAt(actionID.length-1)
   let type = actionID.charAt(0);
   var left = [83,172,262,352,444,532];
@@ -186,7 +208,8 @@ function addCover(type, itemIndex) {
 
 function actionCover(actionID) {
   let actionPanel = $("#actionPanel");
-  actionPanel.remove()
+  actionPanel.remove();
+  actionPanelOpen = false;
   var left = [83,172,262,352,444,532]
   let idx = parseInt(actionID.charAt(actionID.length-1))
   let type = "coat";
@@ -206,7 +229,8 @@ function actionCover(actionID) {
 
 function actionMelt(actionID) {
   let actionPanel = $("#actionPanel");
-  actionPanel.remove()
+  actionPanel.remove();
+  actionPanelOpen = false;
   var left = [83,172,262,352,444,532]
   let idx = parseInt(actionID.charAt(actionID.length-1))
   if (state[idx - 1] == 2) {
