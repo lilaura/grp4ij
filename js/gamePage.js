@@ -113,7 +113,31 @@ function checkleaking() {
         actionPanelOpen = false;
       }
     }
+
+    if (state[idx - 1] == 3 && change == false) {
+      change = true;
+      state[idx - 1] = 4;
+      var img = createItemDivString(idx, "burstpipe", "burstpipe.png");
+      $("body").append(img);
+
+      let newpipe = $('#burstpipe'+idx);
+
+      let oldpipe = $("#pipe" + idx);
+      
+      let ice = $("#bigice" + idx);
+      ice.remove();
+      newpipe.css("position", "absolute");
+      newpipe.css("top", 345);
+      newpipe.css('width',75);
+      newpipe.css("left", left[idx-1]-30);
+      newpipe.css("z-index",12);
+      oldpipe.remove();
+    }
+
+
     if (state[idx - 1] == 4 && change == false) {
+      window.location.href = "gameover.html";
+
       let undoCoat = Math.random();
       if (undoCoat > 0.75) {
         change = true;
