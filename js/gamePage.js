@@ -4,7 +4,7 @@ let existAP = false;
 let haveCurrAct = false;
 let currActTime = 0;
 let actionPanelOpen = false;
-
+let leaking_frequency = 5000;
 var state = [];
 for (var n = 0; n < 6; ++n) {
   state[n] = 0;
@@ -24,11 +24,16 @@ for (var n = 0; n < 6; ++n) {
 $(document).ready(function () {
   console.log("Ready!");
   // pipe = $('#pipe0');
+  $(".btn-primary").click(function () {
+    leaking_frequency -= 1000;
+  });
+  $(".btn-warning").click(function () {
+    leaking_frequency += 1000;
+  });
   setInterval(function () {
     checkleaking();
-  }, 5000);
+  }, leaking_frequency);
 });
-
 function createItemDivString(itemIndex, type, imageString) {
   return (
     "<img src='asset/pipe-state/" +
@@ -49,7 +54,7 @@ function getRandomNumber(min, max) {
 function checkleaking() {
   for (var idx = 1; idx < 7; idx++) {
     var change = false;
-    var left = [83,172,262,352,444,532]
+    var left = [83, 172, 262, 352, 444, 532];
     if (state[idx - 1] == 0 && change == false) {
       let p = getRandomNumber(0, 1);
       change = true;
@@ -61,11 +66,14 @@ function checkleaking() {
         $("body").append(img);
         let leak = $("#leak" + idx);
         let tube = $("#pipe" + idx);
+        5;
         leak.css("position", "absolute");
         leak.css("top", 355);
-        leak.css('height',90);
-        leak.css("left", left[idx-1]);
-        leak.css("z-index",10);
+        leak.css("height", 90);
+        leak.css("left", left[idx - 1]);
+        leak.css("z-index", 10);
+        document.getElementById("pipe" + idx + "_status").innerHTML =
+          "Pipe" + idx + "'s status: Leaking";
         // leak.css("top", parseInt(tube.css("top")));
         if (actionPanelOpen) {
           let actionPanel = $("#actionPanel");
@@ -82,10 +90,12 @@ function checkleaking() {
       let ice = $("#smallice" + idx);
       let leak = $("#leak" + idx);
       ice.css("position", "absolute");
-      ice.css("left",left[idx-1]);
+      ice.css("left", left[idx - 1]);
       ice.css("top", 350);
-      ice.css('height',85);
-      ice.css("z-index",11);
+      ice.css("height", 85);
+      ice.css("z-index", 11);
+      document.getElementById("pipe" + idx + "_status").innerHTML =
+        "Pipe" + idx + "'s status: Small ice";
       leak.remove();
       // console.log("#smallice" + idx)
       if (actionPanelOpen) {
@@ -102,10 +112,12 @@ function checkleaking() {
       let ice = $("#bigice" + idx);
       let smice = $("#smallice" + idx);
       ice.css("position", "absolute");
-      ice.css("left", left[idx-1]);
+      ice.css("left", left[idx - 1]);
       ice.css("top", 358);
-      ice.css('height',73);
-      ice.css("z-index",12);
+      ice.css("height", 73);
+      ice.css("z-index", 12);
+      document.getElementById("pipe" + idx + "_status").innerHTML =
+        "Pipe" + idx + "'s status: Big ice";
       smice.remove();
       if (actionPanelOpen) {
         let actionPanel = $("#actionPanel");
@@ -120,20 +132,21 @@ function checkleaking() {
       var img = createItemDivString(idx, "burstpipe", "burstpipe.png");
       $("body").append(img);
 
-      let newpipe = $('#burstpipe'+idx);
+      let newpipe = $("#burstpipe" + idx);
 
       let oldpipe = $("#pipe" + idx);
-      
+
       let ice = $("#bigice" + idx);
       ice.remove();
       newpipe.css("position", "absolute");
       newpipe.css("top", 345);
-      newpipe.css('width',75);
-      newpipe.css("left", left[idx-1]-30);
-      newpipe.css("z-index",12);
+      newpipe.css("width", 75);
+      newpipe.css("left", left[idx - 1] - 30);
+      newpipe.css("z-index", 12);
+      document.getElementById("pipe" + idx + "_status").innerHTML =
+        "Pipe" + idx + "'s status: Bursted";
       oldpipe.remove();
     }
-
 
     if (state[idx - 1] == 4 && change == false) {
       window.location.href = "gameover.html";
@@ -154,73 +167,77 @@ function checkleaking() {
   }
 }
 function createActionPanel(type, actID) {
-  if (type == 'l') {
+  if (type == "l") {
     return (
-      "<div id='actionPanel'> <button id='" + actID + 
+      "<div id='actionPanel'> <button id='" +
+      actID +
       "'class='action1' onClick='actionReplace(this.id)'> replace </button>" +
-      " <button id='" + actID + 
+      " <button id='" +
+      actID +
       "'class='action1'' onClick='actionCover(this.id)'> cover </button></div>"
-    )
-  }
-  else if (type == 's') {
+    );
+  } else if (type == "s") {
     return (
-      "<div id='actionPanel'> <button id='" + actID + 
+      "<div id='actionPanel'> <button id='" +
+      actID +
       "'class='action1' onClick='actionReplace(this.id)'> replace </button>" +
-      " <button id='" + actID + 
+      " <button id='" +
+      actID +
       "'class='action1'' onClick='actionMelt(this.id)'> melt </button></div>"
-    )
+    );
   }
-  if (type == 'b') {
+  if (type == "b") {
     return (
-      "<div id='actionPanel'> <button id='" + actID + 
+      "<div id='actionPanel'> <button id='" +
+      actID +
       "'class='action1' onClick='actionReplace(this.id)'> replace </button>" +
-      " <button id='" + actID + 
+      " <button id='" +
+      actID +
       "'class='action1'' onClick='actionMelt(this.id)'> melt </button></div>"
-    )
+    );
   }
 }
 function gameAction(actionID) {
-  // if 
+  // if
   actionPanelOpen = true;
   if (existAP == false) {
     existAP = true;
   } else {
-    let prevAP = $("#actionPanel")
+    let prevAP = $("#actionPanel");
     prevAP.remove();
     // console.log("removed");
   }
   let type = actionID.charAt(0);
-  let idx = parseInt(actionID.charAt(actionID.length-1))
+  let idx = parseInt(actionID.charAt(actionID.length - 1));
   // console.log(idx)
   // console.log(type);
-  let ap = createActionPanel(type,actionID);
+  let ap = createActionPanel(type, actionID);
   $("body").append(ap);
-  var left = [83,172,262,352,444,532]
+  var left = [83, 172, 262, 352, 444, 532];
   // let currAP = $("#actionPanel");
   // currAP.css("top",305);
   // currAP.css("left", left[idx-1]);
-
 }
 
 function actionReplace(actionID) {
   let actionPanel = $("#actionPanel");
   actionPanel.remove();
   actionPanelOpen = false;
-  let idx = actionID.charAt(actionID.length-1)
+  let idx = actionID.charAt(actionID.length - 1);
   let type = actionID.charAt(0);
-  var left = [83,172,262,352,444,532];
-  let currState = $("#"+actionID);
+  var left = [83, 172, 262, 352, 444, 532];
+  let currState = $("#" + actionID);
   // console.log()
-  console.log(currState)
+  console.log(currState);
   // add curr action thing here
   currState.remove();
   console.log("fixed");
-  state[idx-1]=0;
+  state[idx - 1] = 0;
 }
 
 function addCover(type, itemIndex) {
   return (
-    "<img src='asset/pipe-state/coat.png" + 
+    "<img src='asset/pipe-state/coat.png" +
     "'id='" +
     type +
     itemIndex +
@@ -234,55 +251,55 @@ function actionCover(actionID) {
   let actionPanel = $("#actionPanel");
   actionPanel.remove();
   actionPanelOpen = false;
-  var left = [83,172,262,352,444,532]
-  let idx = parseInt(actionID.charAt(actionID.length-1))
+  var left = [83, 172, 262, 352, 444, 532];
+  let idx = parseInt(actionID.charAt(actionID.length - 1));
   let type = "coat";
-  let currState = $("#"+actionID);
+  let currState = $("#" + actionID);
   // currState.remove();
-  let cov = addCover(type,idx);
+  let cov = addCover(type, idx);
   $("body").append(cov);
   let cover = $("#coat" + idx);
   cover.css("position", "absolute");
-  cover.css("left",left[idx-1]);
+  cover.css("left", left[idx - 1]);
   cover.css("top", 350);
-  cover.css('height',85);
-  cover.css("z-index",11);
-  currState.remove()
-  state[idx-1]=4;
+  cover.css("height", 85);
+  cover.css("z-index", 11);
+  currState.remove();
+  state[idx - 1] = 4;
 }
 
 function actionMelt(actionID) {
   let actionPanel = $("#actionPanel");
   actionPanel.remove();
   actionPanelOpen = false;
-  var left = [83,172,262,352,444,532]
-  let idx = parseInt(actionID.charAt(actionID.length-1))
+  var left = [83, 172, 262, 352, 444, 532];
+  let idx = parseInt(actionID.charAt(actionID.length - 1));
   if (state[idx - 1] == 2) {
-      state[idx - 1] = 1;
-      var img = createItemDivString(idx, "leak", "drip.png");
-      $("body").append(img);
-      let ice = $("#smallice" + idx);
-      let leak = $("#leak" + idx);
-      leak.css("position", "absolute");
-      leak.css("left",left[idx-1]);
-      leak.css("top", 358);
-      leak.css('height',73);
-      leak.css("z-index",12);
-      ice.remove();
-      // console.log("#smallice" + idx)
-      // console.log(leak)
-    }
-    if (state[idx - 1] == 3) {
-      state[idx - 1] = 2;
-      var img = createItemDivString(idx, "smallice", "sm-ice.png");
-      $("body").append(img);
-      let ice = $("#smallice" + idx);
-      let bigice = $("#bigice" + idx);
-      ice.css("position", "absolute");
-      ice.css("left", left[idx-1]);
-      ice.css("top", 350);
-      ice.css('height',85);
-      ice.css("z-index",11);
-      bigice.remove();
-    }
+    state[idx - 1] = 1;
+    var img = createItemDivString(idx, "leak", "drip.png");
+    $("body").append(img);
+    let ice = $("#smallice" + idx);
+    let leak = $("#leak" + idx);
+    leak.css("position", "absolute");
+    leak.css("left", left[idx - 1]);
+    leak.css("top", 358);
+    leak.css("height", 73);
+    leak.css("z-index", 12);
+    ice.remove();
+    // console.log("#smallice" + idx)
+    // console.log(leak)
+  }
+  if (state[idx - 1] == 3) {
+    state[idx - 1] = 2;
+    var img = createItemDivString(idx, "smallice", "sm-ice.png");
+    $("body").append(img);
+    let ice = $("#smallice" + idx);
+    let bigice = $("#bigice" + idx);
+    ice.css("position", "absolute");
+    ice.css("left", left[idx - 1]);
+    ice.css("top", 350);
+    ice.css("height", 85);
+    ice.css("z-index", 11);
+    bigice.remove();
+  }
 }
