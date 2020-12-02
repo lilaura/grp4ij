@@ -14,7 +14,7 @@ for (var n = 0; n < 6; ++n) {
 //the state array will store states for all pipes based on their index
 //pipe1 with state[0], and pipe2 with state[1]...
 //there are 5 possible value for the state, 0 for normal, 1 for leaking
-//2 for small ice, 3 for large ice and 4 for totally broken
+//2 for small ice, 3 for large ice and 5 for totally broken
 //a normal pipe will have 40% to be leaking and a borken pipe, after every 5 seconds, will go to the next state
 //
 //some possible idea is that if you want to implement the solver, you can add more possible values in the array
@@ -52,6 +52,13 @@ function getRandomNumber(min, max) {
 }
 
 function checkleaking() {
+  if (parseInt($("#money").html()) <= 0){
+    window.location.href = "gameover.html";
+  }
+  let val1 = parseInt($("#money").html());
+  val1 +=10;
+  $("#money").html(val1);
+
   for (var idx = 1; idx < 7; idx++) {
     var change = false;
     var left = [83, 172, 262, 352, 444, 532];
@@ -128,28 +135,25 @@ function checkleaking() {
 
     if (state[idx - 1] == 3 && change == false) {
       change = true;
-      state[idx - 1] = 4;
+      state[idx - 1] = 5;
+      let oldpipe = $("#pipe" + idx);
+      let ice = $("#bigice" + idx);
+      ice.remove();
+      oldpipe.remove();
       var img = createItemDivString(idx, "burstpipe", "burstpipe.png");
       $("body").append(img);
 
-      let newpipe = $("#burstpipe" + idx);
-
-      let oldpipe = $("#pipe" + idx);
-
-      let ice = $("#bigice" + idx);
-      ice.remove();
+      let newpipe = $("#burstpipe" + idx);     
       newpipe.css("position", "absolute");
       newpipe.css("top", 345);
-      newpipe.css("width", 75);
-      newpipe.css("left", left[idx - 1] - 30);
+      newpipe.css("width", 46);
+      newpipe.css("left", left[idx - 1]+30);
       newpipe.css("z-index", 12);
       document.getElementById("pipe" + idx + "_status").innerHTML =
         "Pipe" + idx + "'s status: Bursted";
-      oldpipe.remove();
     }
 
     if (state[idx - 1] == 4 && change == false) {
-      window.location.href = "gameover.html";
 
       let undoCoat = Math.random();
       if (undoCoat > 0.75) {
@@ -164,6 +168,8 @@ function checkleaking() {
         }
       }
     }
+    if (state[idx - 1] == 5 && change == false){
+    window.location.href = "gameover.html";}
   }
 }
 function createActionPanel(type, actID) {
@@ -231,6 +237,9 @@ function actionReplace(actionID) {
   console.log(currState);
   // add curr action thing here
   currState.remove();
+  let val1 = parseInt($("#money").html());
+  val1 -=20;
+  $("#money").html(val1);
   console.log("fixed");
   state[idx - 1] = 0;
 }
@@ -248,6 +257,10 @@ function addCover(type, itemIndex) {
 }
 
 function actionCover(actionID) {
+  let val1 = parseInt($("#money").html());
+  val1 -=8;
+  $("#money").html(val1);
+
   let actionPanel = $("#actionPanel");
   actionPanel.remove();
   actionPanelOpen = false;
@@ -269,6 +282,9 @@ function actionCover(actionID) {
 }
 
 function actionMelt(actionID) {
+  let val1 = parseInt($("#money").html());
+  val1 -=12;
+  $("#money").html(val1);
   let actionPanel = $("#actionPanel");
   actionPanel.remove();
   actionPanelOpen = false;
