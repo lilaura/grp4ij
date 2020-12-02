@@ -147,9 +147,8 @@ p {
   float: left;
   text-align: center;
 }
-.action2 {
-  /*float: left;/*
-	/*text-align: center;*/
+p {
+  font-size: 12pt;
 }
 .action3 {
   float: right;
