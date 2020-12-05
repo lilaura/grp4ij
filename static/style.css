@@ -57,6 +57,9 @@
   margin: 2px 1px;
   cursor: pointer;
 }
+h2{
+  font-family: 'VT323', monospace;
+}
 .rules {
   border: 1px blue;
   background-color: rgba(3, 88, 153, 0.7);
