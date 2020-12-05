@@ -5,6 +5,7 @@ let haveCurrAct = false;
 let currActTime = 0;
 let actionPanelOpen = false;
 let leaking_frequency = 5000;
+let leakIntervalHandle;
 let soundOn;
 var state = [];
 var turn = 0;
@@ -35,10 +36,26 @@ $(document).ready(function () {
 
   $(".btn-primary").click(function () {
     leaking_frequency -= 1000;
+    if (leaking_frequency > 800 && leaking_frequency < 9000){
+        clearInterval(leakIntervalHandle);
+        leakIntervalHandle = setInterval(checkleaking, leaking_frequency);
+        $(".btn-warning").removeClass('disabled');
+      } else {
+        leaking_frequency +=1000;
+        $(this).addClass('disabled');
+      }
     $('#leakingFreq').html(leaking_frequency/1000);
   });
   $(".btn-warning").click(function () {
     leaking_frequency += 1000;
+    if (leaking_frequency > 800 && leaking_frequency < 9000){
+      clearInterval(leakIntervalHandle);
+      leakIntervalHandle = setInterval(checkleaking, leaking_frequency);
+      $(".btn-primary").removeClass('disabled');
+    } else {
+      leaking_frequency -=1000;
+      $(this).addClass('disabled');
+    }
     $('#leakingFreq').html(leaking_frequency/1000);
   });
   setInterval(function () {
