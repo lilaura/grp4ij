@@ -6,7 +6,7 @@ let currActTime = 0;
 let actionPanelOpen = false;
 let leaking_frequency = 5000;
 let leakIntervalHandle;
-let soundOn;
+let soundOn =true;
 var state = [];
 var turn = 0;
 var salary = 10;
@@ -18,7 +18,7 @@ for (var n = 0; n < 6; ++n) {
 
 var replaceau = new Audio('audio/replace.mp3');
 var meltau = new Audio('audio/melt.mp3');
-var coatau = new Audio('audio/coat.mp3');
+var coverau = new Audio('audio/coat.mp3');
 //
 //the main idea for checking states is do a check every 5 seconds
 //the state array will store states for all pipes based on their index
@@ -304,7 +304,7 @@ function actionReplace(actionID) {
   let actionPanel = $("#actionPanel");
   actionPanel.remove();
   actionPanelOpen = false;
-  if (soundOn){replaceau.play();}
+  if (soundOn){replaceau.play(); console.log('playing sound');}
 
   let idx = actionID.charAt(actionID.length - 1);
   let type = actionID.charAt(0);
