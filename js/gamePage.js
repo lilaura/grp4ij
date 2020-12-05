@@ -5,6 +5,7 @@ let haveCurrAct = false;
 let currActTime = 0;
 let actionPanelOpen = false;
 let leaking_frequency = 5000;
+let soundOn;
 var state = [];
 var turn = 0;
 var salary = 10;
@@ -13,6 +14,10 @@ var button_left = 0;
 for (var n = 0; n < 6; ++n) {
   state[n] = 0;
 }
+
+var replaceau = new Audio('audio/replace.mp3');
+var meltau = new Audio('audio/melt.mp3');
+var coatau = new Audio('audio/coat.mp3');
 //
 //the main idea for checking states is do a check every 5 seconds
 //the state array will store states for all pipes based on their index
@@ -39,6 +44,16 @@ $(document).ready(function () {
   setInterval(function () {
     checkleaking();
   }, leaking_frequency);
+
+  $("#soundBtn").click(function() {
+    if (soundOn) {
+      soundOn = false; 
+      $("#soundBtn").html('Turn on sound effects');
+    } else{
+      soundOn = true; 
+      $("#soundBtn").html('Turn off sound effects');
+    }
+  });
 });
 
 function createItemDivString(itemIndex, type, imageString) {
@@ -272,6 +287,8 @@ function actionReplace(actionID) {
   let actionPanel = $("#actionPanel");
   actionPanel.remove();
   actionPanelOpen = false;
+  if (soundOn){replaceau.play();}
+
   let idx = actionID.charAt(actionID.length - 1);
   let type = actionID.charAt(0);
   var left = [83, 172, 262, 352, 444, 532];
@@ -305,6 +322,7 @@ function actionCover(actionID) {
   let val1 = parseInt($("#money").html());
   val1 -= 10;
   $("#money").html(val1);
+  if (soundOn){coverau.play();}
 
   let actionPanel = $("#actionPanel");
   actionPanel.remove();
@@ -329,6 +347,7 @@ function actionCover(actionID) {
 }
 
 function actionMelt(actionID) {
+  if (soundOn){meltau.play();}
   let val1 = parseInt($("#money").html());
   val1 -= 5;
   $("#money").html(val1);
@@ -370,3 +389,5 @@ function actionMelt(actionID) {
       "Pipe" + idx + "'s status: Small ice";
   }
 }
+
+
