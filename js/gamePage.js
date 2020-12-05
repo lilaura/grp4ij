@@ -30,9 +30,11 @@ $(document).ready(function () {
 
   $(".btn-primary").click(function () {
     leaking_frequency -= 1000;
+    $('#leakingFreq').html(leaking_frequency/1000);
   });
   $(".btn-warning").click(function () {
     leaking_frequency += 1000;
+    $('#leakingFreq').html(leaking_frequency/1000);
   });
   setInterval(function () {
     checkleaking();

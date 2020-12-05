@@ -28,7 +28,9 @@
   float: right;
   position: relative;
   z-index: 99;
-  background-color: lightgray;
+  background-color: rgb(223, 221, 221);
+  font-family: 'Play', sans-serif;
+  padding: 15px;
 }
 .buttonStart {
   background-color: CornflowerBlue;
@@ -67,7 +69,7 @@
 .topPanel {
   width: 100%;
   height: 15vh;
-  background-color: lightgray;
+  background-color: rgb(128, 144, 169);
   text-align: center;
 }
 .house {
@@ -86,7 +88,7 @@ divLine {
 .gameBoard {
   height: 85vh;
   /*min-height: calc(100vh -100px);*/
-  background-color: darkgray;
+  background-color: rgb(1, 12, 24);
   width: 100%;
   /*position: relative;*/
 }
@@ -160,17 +162,11 @@ p {
   position: absolute;
   display: inline-block;
 }
-.action1 {
-  /* float: left; */
-  /* text-align: center; */
-}
+
 p {
   font-size: 12pt;
 }
-.action3 {
-  /* float: right; */
-  /*	text-align: center;*/
-}
+
 
 .snowvideo1 {
   position: absolute;
