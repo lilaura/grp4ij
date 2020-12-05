@@ -138,8 +138,11 @@ function checkleaking() {
    
         leak.css("position", "absolute");
         leak.css("height", 90);
-        leak.css("left", parseInt( $("#pipe"+idx).css("left")) + 60);
-        leak.css("top",parseInt( $("#pipe"+idx).css("top")));
+        left_pos = parseInt(tube.css("left")) + 60
+        leak.css("left", left_pos);
+        top_pos = 360;
+        console.log(top_pos);
+        leak.css("top", top_pos);
 
         button_left = left[idx - 1];
         leak.css("z-index", 99);
@@ -163,8 +166,9 @@ function checkleaking() {
       let leak = $("#leak" + idx);
       
       ice.css("position", "absolute");
-      ice.css("left", parseInt( $("#pipe"+idx).css("left")) + 60);
-      ice.css("top",parseInt( $("#pipe"+idx).css("top")));
+      left_pos = parseInt(leak.css("left"))
+      ice.css("left", left_pos);
+      ice.css("top", 350);
       
       ice.css("height", 85);
       ice.css("z-index", 90);
@@ -186,8 +190,9 @@ function checkleaking() {
       let ice = $("#bigice" + idx);
       let smice = $("#smallice" + idx);
       ice.css("position", "absolute");
-      ice.css("left", parseInt( $("#pipe"+idx).css("left")) + 60);
-      ice.css("top",parseInt( $("#pipe"+idx).css("top")));
+      // left_pos = .css("left")) + 60
+      ice.css("left", parseInt(smice.css("left")));
+      ice.css("top", 360);
       ice.css("height", 73);
       ice.css("z-index", 90);
       document.getElementById("pipe" + idx + "_status").innerHTML =
@@ -209,6 +214,8 @@ function checkleaking() {
       ice.css("position", "absolute");
       console.log(oldpipe);
       console.log(idx);
+      left_pos = parseInt(oldpipe.css("left"));
+      console.log(left_pos);
       ice.remove();
       oldpipe.remove();
       var img = createItemDivString(idx, "burstpipe", "brust.png");
@@ -217,8 +224,9 @@ function checkleaking() {
       let newpipe = $("#burstpipe" + idx);
       newpipe.css("position", "absolute");
 
-      newpipe.css("left", parseInt( $("#pipe"+idx).css("left")) + 60);
-      newpipe.css("top",parseInt( $("#pipe"+idx).css("top")));
+      newpipe.css("left", left_pos);
+      console.log(left_pos);
+      newpipe.css("top",350);
 
       newpipe.css("left", left[idx - 1]);
       newpipe.css("z-index", 60);
