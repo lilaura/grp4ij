@@ -22,11 +22,12 @@
   left: 900px;
 }
 #setting_window {
+  top: -555px;
   height: 100%;
   width: 297px;
   float: right;
   position: relative;
-  z-index: 3;
+  z-index: 99;
   background-color: lightgray;
 }
 .buttonStart {
@@ -94,10 +95,21 @@ p {
   font-size: 20px;
 }
 
+#background {
+  display: inline-block;
+  height: 35%;
+  width: 1000px;
+  margin-left: -100px;
+  z-index: 2;
+  position: absolute;
+  top: -130px;
+}
+
 #house {
   display: inline-block;
   height: 100%;
   margin-left: -100px;
+  z-index: 0;
 }
 
 #central {
@@ -111,16 +123,19 @@ p {
 
 .pump {
   width: 70px;
+
   margin-right: -10px;
   margin-top: 5px;
-  position: relative;
   top: -16px;
+  position: relative;
+  right: -15px;
   z-index: 1;
 }
 .pipe0 {
   width: 90px;
   margin: -2px;
   z-index: 1;
+  position: absolute;
 }
 .leaking {
   position: absolute;
@@ -128,9 +143,9 @@ p {
 
 #set1 {
   position: absolute;
-  top: 50%;
-  left: 20px;
-  overflow: hidden;
+  top: 51%;
+  
+  
   width: 1000px;
 }
 
@@ -138,19 +153,38 @@ p {
   width: 100px;
   height: 50px;
   text-align: center;
-  top: 100px;
-  left: 100px;
+  top: 330px;
+  left: 600px;
   border: 1px black;
   z-index: 4;
+  position: absolute;
+  display: inline-block;
 }
 .action1 {
-  float: left;
-  text-align: center;
+  /* float: left; */
+  /* text-align: center; */
 }
 p {
   font-size: 12pt;
 }
 .action3 {
-  float: right;
+  /* float: right; */
   /*	text-align: center;*/
+}
+
+.snowvideo1 {
+  position: absolute;
+}
+.snowvideo2 {
+  position: absolute;
+}
+.snowvideo3 {
+  position: absolute;
+}
+
+video {
+  mix-blend-mode: screen;
+  z-index: 10;
+  top: 30px;
+  left: 0px;
 }

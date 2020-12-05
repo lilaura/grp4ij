@@ -9,6 +9,32 @@
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
       crossorigin="anonymous"
     />
+    <style>
+      #pipe1{
+        left: 83px;
+        top: -10px;
+      }
+      #pipe2{
+        left: 172px;
+        top: -10px;
+      }
+      #pipe3{
+        left: 262px;
+        top: -10px;
+      }
+      #pipe4{
+        left: 352px;
+        top: -10px;
+      }
+      #pipe5{
+        left: 444px;
+        top: -10px;
+      }
+      #pipe6{
+        left: 532px;
+        top: -10px;
+      }
+    </style>
     <title>frostpipe</title>
     <script src="js/jquery.min.js"></script>
     <script src="js/gamePage.js"></script>
@@ -17,12 +43,21 @@
     <h></h>
     <div class="topPanel">
       <!-- background -->
+      <!-- <div class="background">
+        <img id='background' src="asset/ontheground/snowfall.jpg" />
+      </div> -->
       <div class="house">
         <img id="house" src="asset/house.jpg" />
       </div>
     </div>
     <divline />
     <div class="gameBoard">
+      <!-- <div id='ground'>
+        <img
+          class="ground"
+          src="asset/ontheground/ground2.jpg"
+        />
+      </div> -->
       <div id="set1">
         <img
           class="pump"
@@ -66,7 +101,30 @@
           alt="horizontal pipe"
         />
       </div>
-
+      <div id='snowvideo1'>
+        <video width='950' height='550' top='0' autoplay="autoplay" loop="loop">
+          <source
+            src='asset/snowmp4/dot.mp4'
+            type='video/mp4'
+            >
+        </video>
+      </div>
+      <!-- <div id='snowvideo2'>
+        <video width='950' height='550' top='0' autoplay="autoplay" loop="loop">
+          <source
+            src='asset/snowmp4/dot2.mp4'
+            type='video/mp4'
+            >
+        </video>
+      </div>
+      <div id='snowvideo3'>
+        <video width='950' height='550' top='0' autoplay="autoplay" loop="loop">
+          <source
+            src='asset/snowmp4/cartoon.mp4'
+            type='video/mp4'
+            >
+        </video>
+      </div> -->
       <img id="central" src="asset/central.png" width="30%" />
       <div id="setting_window">
         <p>You're receiving $10/cycle for monitoring the pipes.</p>
