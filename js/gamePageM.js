@@ -9,7 +9,7 @@ let leakIntervalHandle;
 let soundOn =true;
 var state = [];
 var turn = 0;
-var salary = 10;
+var salary = 6;
 var leaking = 0.25;
 var button_left = 0;
 for (var n = 0; n < 6; ++n) {
@@ -113,6 +113,7 @@ function checkleaking() {
   if (turn == 12 || turn == 24) {
     leaking += 0.1;
     salary += 5;
+    $("#salary").html(salary)
   }
 
   if (turn == 30) {
@@ -134,11 +135,12 @@ function checkleaking() {
         $("body").append(img);
         let leak = $("#leak" + idx);
         let tube = $("#pipe" + idx);
-        5;
+   
         leak.css("position", "absolute");
-        leak.css("top", 355);
         leak.css("height", 90);
-        leak.css("left", left[idx - 1]);
+        leak.css("left", parseInt( $("#pipe"+idx).css("left")) + 60);
+        leak.css("top",parseInt( $("#pipe"+idx).css("top")));
+
         button_left = left[idx - 1];
         leak.css("z-index", 99);
 
@@ -159,10 +161,11 @@ function checkleaking() {
       $("body").append(img);
       let ice = $("#smallice" + idx);
       let leak = $("#leak" + idx);
+      
       ice.css("position", "absolute");
-      ice.css("left", left[idx - 1]);
-      button_left = left[idx - 1];
-      ice.css("top", 350);
+      ice.css("left", parseInt( $("#pipe"+idx).css("left")) + 60);
+      ice.css("top",parseInt( $("#pipe"+idx).css("top")));
+      
       ice.css("height", 85);
       ice.css("z-index", 90);
       document.getElementById("pipe" + idx + "_status").innerHTML =
@@ -183,8 +186,8 @@ function checkleaking() {
       let ice = $("#bigice" + idx);
       let smice = $("#smallice" + idx);
       ice.css("position", "absolute");
-      ice.css("left", left[idx - 1]);
-      ice.css("top", 358);
+      ice.css("left", parseInt( $("#pipe"+idx).css("left")) + 60);
+      ice.css("top",parseInt( $("#pipe"+idx).css("top")));
       ice.css("height", 73);
       ice.css("z-index", 90);
       document.getElementById("pipe" + idx + "_status").innerHTML =
@@ -213,9 +216,10 @@ function checkleaking() {
 
       let newpipe = $("#burstpipe" + idx);
       newpipe.css("position", "absolute");
-      newpipe.css("top", 335);
-      // newpipe.css("width", 46);
-      newpipe.css("height", 90);
+
+      newpipe.css("left", parseInt( $("#pipe"+idx).css("left")) + 60);
+      newpipe.css("top",parseInt( $("#pipe"+idx).css("top")));
+
       newpipe.css("left", left[idx - 1]);
       newpipe.css("z-index", 60);
       document.getElementById("pipe" + idx + "_status").innerHTML =

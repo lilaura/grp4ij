@@ -113,6 +113,7 @@ function checkleaking() {
   if (turn == 12 || turn == 24) {
     leaking += 0.1;
     salary += 5;
+    $("#salary").html(salary)
   }
 
   if (turn == 30) {
