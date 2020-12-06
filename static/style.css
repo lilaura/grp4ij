@@ -118,8 +118,13 @@ p {
 }
 #soundBtn{
   position: relative;
-  right: -550px;
+  right: -525px;
   top:-100px;
+}
+#exit{
+  position: relative;
+  right: -480px;
+  top:-90px;
 }
 
 #central {
