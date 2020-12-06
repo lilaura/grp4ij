@@ -71,7 +71,7 @@ h2{
 }
 .topPanel {
   width: 100%;
-  height: 15vh;
+  height: 100px;
   background-color: rgb(128, 144, 169);
   text-align: center;
 }
@@ -111,10 +111,15 @@ p {
 }
 
 #house {
-  display: inline-block;
+  
   height: 100%;
   margin-left: -100px;
   z-index: 0;
+}
+#soundBtn{
+  position: relative;
+  right: -550px;
+  top:-100px;
 }
 
 #central {
