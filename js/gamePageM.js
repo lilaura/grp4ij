@@ -9,10 +9,10 @@ let leakIntervalHandle;
 let soundOn =true;
 var state = [];
 var turn = 0;
-var salary = 6;
+var salary = 10;
 var leaking = 0.25;
 var button_left = 0;
-for (var n = 0; n < 6; ++n) {
+for (var n = 0; n < 12; ++n) {
   state[n] = 0;
 }
 
@@ -104,9 +104,9 @@ function getRandomNumber(min, max) {
 }
 
 function checkleaking() {
-  if (parseInt($("#money").html()) <= 0) {
-    window.location.href = "gameover.html";
-  }
+  // if (parseInt($("#money").html()) <= 0) {
+  //   window.location.href = "gameoverM.html";
+  // }
   let val1 = parseInt($("#money").html());
   val1 += salary;
   $("#money").html(val1);
@@ -120,9 +120,9 @@ function checkleaking() {
     window.location.href = "gamesucceed.html";
   }
   turn += 1;
-  for (var idx = 1; idx < 7; idx++) {
+  for (var idx = 1; idx < 13; idx++) {
     var change = false;
-    var left = [83, 172, 262, 352, 444, 532];
+
     if (state[idx - 1] == 0 && change == false) {
       let p = getRandomNumber(0, 1);
       change = true;
@@ -138,10 +138,16 @@ function checkleaking() {
    
         leak.css("position", "absolute");
         leak.css("height", 90);
-        leak.css("left", parseInt( $("#pipe"+idx).css("left")) + 60);
-        leak.css("top",parseInt( $("#pipe"+idx).css("top")));
+        left_pos = parseInt(tube.css("left")) + 60
+        leak.css("left", left_pos);
+        top_pos = 235;
+        if (idx > 6) {
+          top_pos = 410;
+        }
+        console.log(top_pos);
+        leak.css("top", top_pos);
 
-        button_left = left[idx - 1];
+        button_left = left_pos;
         leak.css("z-index", 99);
 
         document.getElementById("pipe" + idx + "_status").innerHTML =
@@ -163,8 +169,13 @@ function checkleaking() {
       let leak = $("#leak" + idx);
       
       ice.css("position", "absolute");
-      ice.css("left", parseInt( $("#pipe"+idx).css("left")) + 60);
-      ice.css("top",parseInt( $("#pipe"+idx).css("top")));
+      left_pos = parseInt(leak.css("left"))
+      ice.css("left", left_pos);
+      top_pos = 225;
+      if (idx > 6) {
+        top_pos = 400;
+      }
+      ice.css("top", top_pos);
       
       ice.css("height", 85);
       ice.css("z-index", 90);
@@ -186,8 +197,13 @@ function checkleaking() {
       let ice = $("#bigice" + idx);
       let smice = $("#smallice" + idx);
       ice.css("position", "absolute");
-      ice.css("left", parseInt( $("#pipe"+idx).css("left")) + 60);
-      ice.css("top",parseInt( $("#pipe"+idx).css("top")));
+      // left_pos = .css("left")) + 60
+      ice.css("left", parseInt(smice.css("left")));
+      top_pos = 230;
+      if (idx>6) {
+        top_pos = 400;
+      }
+      ice.css("top", top_pos);
       ice.css("height", 73);
       ice.css("z-index", 90);
       document.getElementById("pipe" + idx + "_status").innerHTML =
@@ -209,6 +225,8 @@ function checkleaking() {
       ice.css("position", "absolute");
       console.log(oldpipe);
       console.log(idx);
+      left_pos = parseInt(oldpipe.css("left"));
+      console.log(left_pos);
       ice.remove();
       oldpipe.remove();
       var img = createItemDivString(idx, "burstpipe", "brust.png");
@@ -217,10 +235,15 @@ function checkleaking() {
       let newpipe = $("#burstpipe" + idx);
       newpipe.css("position", "absolute");
 
-      newpipe.css("left", parseInt( $("#pipe"+idx).css("left")) + 60);
-      newpipe.css("top",parseInt( $("#pipe"+idx).css("top")));
+      newpipe.css("left", left_pos);
+      console.log(left_pos);
+      top_pos = 225;
+      if (idx > 6) {
+        top_pos = 400;
+      }
+      newpipe.css("top",top_pos);
 
-      newpipe.css("left", left[idx - 1]);
+      newpipe.css("left", left_pos);
       newpipe.css("z-index", 60);
       document.getElementById("pipe" + idx + "_status").innerHTML =
         "Pipe" + idx + "'s status: Bursted";
@@ -241,7 +264,8 @@ function checkleaking() {
       }
     }
     if (state[idx - 1] == 5 && change == false) {
-      window.location.href = "gameover.html";
+      console.log("abc")
+      window.location.href = "gameoverM.html";
     }
   }
 }
@@ -289,15 +313,27 @@ function gameAction(actionID) {
   }
   let type = actionID.charAt(0);
   let idx = parseInt(actionID.charAt(actionID.length - 1));
+  let tmp = actionID.charAt(actionID.length - 2);
+  // console.log("TMP", tmp)
+  if (tmp < '2') {
+    idx = parseInt(tmp) * 10 + idx;
+    console.log("IDX", idx);
+  }
+  
   // console.log(idx)
   // console.log(type);
 
   let ap = createActionPanel(type, actionID);
   $("body").append(ap);
-  var left = [83, 172, 262, 352, 444, 532];
+
   button_left = $("#" + actionID).offset().left;
   $("#actionPanel").css("left", button_left);
-  $("#actionPanel").css("top", 280);
+  top_pos = 150;
+  if (idx > 6) {
+    console.log("down")
+    top_pos = 320;
+  }
+  $("#actionPanel").css("top", top_pos);
 
   // let currAP = $("#actionPanel");
   // currAP.css("top",305);
@@ -311,8 +347,14 @@ function actionReplace(actionID) {
   if (soundOn){replaceau.play(); console.log('playing sound');}
 
   let idx = actionID.charAt(actionID.length - 1);
+  let tmp = actionID.charAt(actionID.length - 2);
+  // console.log("TMP", tmp)
+  if (tmp < '2') {
+    idx = parseInt(tmp) * 10 + idx;
+    // console.log("IDX", idx);
+  }
   let type = actionID.charAt(0);
-  var left = [83, 172, 262, 352, 444, 532];
+
   let currState = $("#" + actionID);
   // console.log()
   //
@@ -348,8 +390,14 @@ function actionCover(actionID) {
   let actionPanel = $("#actionPanel");
   actionPanel.remove();
   actionPanelOpen = false;
-  var left = [83, 172, 262, 352, 444, 532];
+
   let idx = parseInt(actionID.charAt(actionID.length - 1));
+  let tmp = actionID.charAt(actionID.length - 2);
+  // console.log("TMP", tmp)
+  if (tmp < '2') {
+    idx = parseInt(tmp) * 10 + idx;
+    // console.log("IDX", idx);
+  }
   let type = "coat";
   let currState = $("#" + actionID);
   // currState.remove();
@@ -357,8 +405,12 @@ function actionCover(actionID) {
   $("body").append(cov);
   let cover = $("#coat" + idx);
   cover.css("position", "absolute");
-  cover.css("left", left[idx - 1]);
-  cover.css("top", 350);
+  cover.css("left", parseInt($("#pipe" + idx).css("left")) + 60);
+  top_pos = 225;
+  if (idx > 6) {
+    top_pos = 400;
+  }
+  cover.css("top", top_pos);
   cover.css("height", 85);
   cover.css("z-index", 80);
   currState.remove();
@@ -375,8 +427,14 @@ function actionMelt(actionID) {
   let actionPanel = $("#actionPanel");
   actionPanel.remove();
   actionPanelOpen = false;
-  var left = [83, 172, 262, 352, 444, 532];
+
   let idx = parseInt(actionID.charAt(actionID.length - 1));
+  let tmp = actionID.charAt(actionID.length - 2);
+  // console.log("TMP", tmp)
+  if (tmp < '2') {
+    idx = parseInt(tmp) * 10 + idx;
+    // console.log("IDX", idx);
+  }
   if (state[idx - 1] == 2) {
     state[idx - 1] = 1;
     var img = createItemDivString(idx, "leak", "drip.png");
@@ -384,9 +442,13 @@ function actionMelt(actionID) {
     let ice = $("#smallice" + idx);
     let leak = $("#leak" + idx);
     leak.css("position", "absolute");
-    leak.css("left", left[idx - 1]);
-    leak.css("top", 358);
-    leak.css("height", 73);
+    leak.css("left", parseInt(ice.css("left")));
+    top_pos = 235;
+    if (idx > 6) {
+      top_pos = 410;
+    }
+    leak.css("top", top_pos);
+    leak.css("height", 90);
     leak.css("z-index", 80);
     ice.remove();
     document.getElementById("pipe" + idx + "_status").innerHTML =
@@ -401,8 +463,12 @@ function actionMelt(actionID) {
     let ice = $("#smallice" + idx);
     let bigice = $("#bigice" + idx);
     ice.css("position", "absolute");
-    ice.css("left", left[idx - 1]);
-    ice.css("top", 350);
+    ice.css("left", parseInt(bigice.css("left")));
+    top_pos = 225;
+    if (idx > 6) {
+      top_pos = 400;
+    }
+    ice.css("top", top_pos);
     ice.css("height", 85);
     ice.css("z-index", 80);
     bigice.remove();

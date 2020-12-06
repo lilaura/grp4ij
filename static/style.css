@@ -149,10 +149,16 @@ p {
 #set1 {
   position: absolute;
   top: 350px;
-  
+}
 
-  
-  
+#set1M {
+  position: absolute;
+  top: 225px;
+}
+
+#set2M {
+  position: absolute;
+  top: 400px;
 }
 
 #actionPanel {

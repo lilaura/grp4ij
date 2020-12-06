@@ -14,33 +14,46 @@
     />
     <style>
       #pipe1{
-        left: 83px;
-        top: -10px;
+        left: 10px;
       }
       #pipe2{
-        left: 172px;
-        top: -10px;
+        left: 130px;
       }
       #pipe3{
-        left: 262px;
-        top: -10px;
+        left: 250px;
       }
       #pipe4{
-        left: 352px;
-        top: -10px;
+        left: 370px;
       }
       #pipe5{
-        left: 444px;
-        top: -10px;
+        left: 490px;
       }
       #pipe6{
-        left: 532px;
-        top: -10px;
+        left: 610px;
       }
+      #pipe7{
+        left: 10px;
+      }
+      #pipe8{
+        left: 130px;
+      }
+      #pipe9{
+        left: 250px;
+      }
+      #pipe10{
+        left: 370px;
+      }
+      #pipe11{
+        left: 490px;
+      }
+      #pipe12{
+        left: 610px;
+      }
+
     </style>
     <title>frostpipe</title>
     <script src="js/jquery.min.js"></script>
-    <script src="js/gamePage.js"></script>
+    <script src="js/gamePageM.js"></script>
   </head>
   <body>
     <h></h>
@@ -61,7 +74,7 @@
           src="asset/ontheground/ground2.jpg"
         />
       </div> -->
-      <div id="set1">
+      <div id="set1M">
         <img
           class="pump"
           src="asset/pump/offshore-pump_West.png"
@@ -104,6 +117,50 @@
           alt="horizontal pipe"
         />
       </div>
+
+      <div id="set2M">
+        <img
+          class="pump"
+          src="asset/pump/offshore-pump_West.png"
+          alt="offshore pump"
+        />
+        <img
+          id="pipe7"
+          class="pipe0"
+          src="asset/normpipe1.png"
+          alt="horizontal pipe"
+        />
+        <img
+          id="pipe8"
+          class="pipe0"
+          src="asset/normpipe1.png"
+          alt="horizontal pipe"
+        />
+        <img
+          id="pipe9"
+          class="pipe0"
+          src="asset/normpipe1.png"
+          alt="horizontal pipe"
+        />
+        <img
+          id="pipe10"
+          class="pipe0"
+          src="asset/normpipe1.png"
+          alt="horizontal pipe"
+        />
+        <img
+          id="pipe11"
+          class="pipe0"
+          src="asset/normpipe1.png"
+          alt="horizontal pipe"
+        />
+        <img
+          id="pipe12"
+          class="pipe0"
+          src="asset/normpipe1.png"
+          alt="horizontal pipe"
+        />
+      </div>
       <div id='snowvideo1'>
         <video width='950' height='550' top='0' autoplay="autoplay" loop="loop">
           <source
@@ -112,27 +169,13 @@
             >
         </video>
       </div>
-      <!-- <div id='snowvideo2'>
-        <video width='950' height='550' top='0' autoplay="autoplay" loop="loop">
-          <source
-            src='asset/snowmp4/dot2.mp4'
-            type='video/mp4'
-            >
-        </video>
-      </div>
-      <div id='snowvideo3'>
-        <video width='950' height='550' top='0' autoplay="autoplay" loop="loop">
-          <source
-            src='asset/snowmp4/cartoon.mp4'
-            type='video/mp4'
-            >
-        </video>
-      </div> -->
+      
+
       <img id="central" src="asset/central.png" width="30%" />
       <div id="setting_window">
         <h2>Work Log Dashboard</h2>
-        <p>You're receiving $<span id="money">8</span>/cycle for monitoring the pipes.</p>
-        <h4>$<span id="money">60</span></h4>
+        <p>You're receiving $<span id="salary">10</span>/cycle for monitoring the pipes.</p>
+        <h4>$<span id="money">120</span></h4>
         <h4>Leaking counting down:</h4>
         <h6 id="pipe1_status">Pipe1's status: Normal</h3>
         <h6 id="pipe2_status">Pipe2's status: Normal</h3>
@@ -140,6 +183,12 @@
         <h6 id="pipe4_status">Pipe4's status: Normal</h3>
         <h6 id="pipe5_status">Pipe5's status: Normal</h3>
     <h6 id="pipe6_status">Pipe6's status: Normal</h3>
+      <h6 id="pipe7_status">Pipe7's status: Normal</h3>
+        <h6 id="pipe8_status">Pipe8's status: Normal</h3>
+        <h6 id="pipe9_status">Pipe9's status: Normal</h3>
+        <h6 id="pipe10_status">Pipe10's status: Normal</h3>
+        <h6 id="pipe11_status">Pipe11's status: Normal</h3>
+    <h6 id="pipe12_status">Pipe12's status: Normal</h3>
       <h5>New leaking pipe every <span id='leakingFreq'>5</span> seconds.</h5>
     <button type="button" class="btn btn-primary">Speed Up the leaking</button>
     <button type="button" class="btn btn-warning">Slow down the leaking</button>

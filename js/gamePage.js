@@ -104,9 +104,9 @@ function getRandomNumber(min, max) {
 }
 
 function checkleaking() {
-  if (parseInt($("#money").html()) <= 0) {
-    window.location.href = "gameover.html";
-  }
+  // if (parseInt($("#money").html()) <= 0) {
+  //   window.location.href = "gameover.html";
+  // }
   let val1 = parseInt($("#money").html());
   val1 += salary;
   $("#money").html(val1);
@@ -144,7 +144,7 @@ function checkleaking() {
         console.log(top_pos);
         leak.css("top", top_pos);
 
-        button_left = left[idx - 1];
+        button_left = left_pos;
         leak.css("z-index", 99);
 
         document.getElementById("pipe" + idx + "_status").innerHTML =
@@ -228,7 +228,7 @@ function checkleaking() {
       console.log(left_pos);
       newpipe.css("top",350);
 
-      newpipe.css("left", left[idx - 1]);
+      newpipe.css("left", left_pos);
       newpipe.css("z-index", 60);
       document.getElementById("pipe" + idx + "_status").innerHTML =
         "Pipe" + idx + "'s status: Bursted";
@@ -365,7 +365,7 @@ function actionCover(actionID) {
   $("body").append(cov);
   let cover = $("#coat" + idx);
   cover.css("position", "absolute");
-  cover.css("left", left[idx - 1]);
+  cover.css("left", parseInt(currState.css("left")));
   cover.css("top", 350);
   cover.css("height", 85);
   cover.css("z-index", 80);
@@ -392,9 +392,9 @@ function actionMelt(actionID) {
     let ice = $("#smallice" + idx);
     let leak = $("#leak" + idx);
     leak.css("position", "absolute");
-    leak.css("left", left[idx - 1]);
+    leak.css("left", parseInt(ice.css("left")));
     leak.css("top", 358);
-    leak.css("height", 73);
+    leak.css("height", 90);
     leak.css("z-index", 80);
     ice.remove();
     document.getElementById("pipe" + idx + "_status").innerHTML =
@@ -409,7 +409,7 @@ function actionMelt(actionID) {
     let ice = $("#smallice" + idx);
     let bigice = $("#bigice" + idx);
     ice.css("position", "absolute");
-    ice.css("left", left[idx - 1]);
+    ice.css("left", parseInt(bigice.css("left")));
     ice.css("top", 350);
     ice.css("height", 85);
     ice.css("z-index", 80);
