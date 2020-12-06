@@ -9,7 +9,7 @@ let leakIntervalHandle;
 let soundOn =true;
 var state = [];
 var turn = 0;
-var salary = 12;
+var salary = 2;
 var leaking = 0.25;
 var button_left = 0;
 for (var n = 0; n < 12; ++n) {
@@ -120,6 +120,7 @@ function checkleaking() {
     window.location.href = "gamesucceed.html";
   }
   turn += 1;
+  $("#round").html(30 - turn);
   for (var idx = 1; idx < 13; idx++) {
     var change = false;
 

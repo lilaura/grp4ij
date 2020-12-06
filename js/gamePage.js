@@ -104,9 +104,9 @@ function getRandomNumber(min, max) {
 }
 
 function checkleaking() {
-  if (parseInt($("#money").html()) <= 0) {
-    window.location.href = "gameover.html";
-  }
+  // if (parseInt($("#money").html()) <= 0) {
+  //   window.location.href = "gameover.html";
+  // }
   let val1 = parseInt($("#money").html());
   val1 += salary;
   $("#money").html(val1);
@@ -288,29 +288,27 @@ function createActionPanel(type, actID) {
 
 function gameAction(actionID) {
   // if
-  actionPanelOpen = true;
-  if (existAP == false) {
-    existAP = true;
-  } else {
-    let prevAP = $("#actionPanel");
-    prevAP.remove();
-    // console.log("removed");
+  if (parseInt($("#money").html()) >= 5) {
+    actionPanelOpen = true;
+    if (existAP == false) {
+      existAP = true;
+    } else {
+      let prevAP = $("#actionPanel");
+      prevAP.remove();
+      // console.log("removed");
+    }
+    let type = actionID.charAt(0);
+    let idx = parseInt(actionID.charAt(actionID.length - 1));
+    // console.log(idx)
+    // console.log(type);
+
+    let ap = createActionPanel(type, actionID);
+    $("body").append(ap);
+    button_left = $("#" + actionID).offset().left;
+    $("#actionPanel").css("left", button_left);
+    $("#actionPanel").css("top", 280);
+
   }
-  let type = actionID.charAt(0);
-  let idx = parseInt(actionID.charAt(actionID.length - 1));
-  // console.log(idx)
-  // console.log(type);
-
-  let ap = createActionPanel(type, actionID);
-  $("body").append(ap);
-  var left = [83, 172, 262, 352, 444, 532];
-  button_left = $("#" + actionID).offset().left;
-  $("#actionPanel").css("left", button_left);
-  $("#actionPanel").css("top", 280);
-
-  // let currAP = $("#actionPanel");
-  // currAP.css("top",305);
-  // currAP.css("left", left[idx-1]);
 }
 
 function actionReplace(actionID) {
