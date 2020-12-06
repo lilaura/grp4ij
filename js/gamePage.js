@@ -218,7 +218,7 @@ function checkleaking() {
       left_pos = parseInt(oldpipe.css("left"));
       // console.log(left_pos);
       ice.remove();
-      oldpipe.attr("src", "/asset/brust.png");
+      oldpipe.attr("src", "asset/brust.png");
       // var img = createItemDivString(idx, "burstpipe", "brust.png");
       // $("body").append(img);
 
