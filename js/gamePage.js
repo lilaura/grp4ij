@@ -6,7 +6,7 @@ let currActTime = 0;
 let actionPanelOpen = false;
 let leaking_frequency = 5000;
 let leakIntervalHandle;
-let soundOn =true;
+let soundOn = true;
 var state = [];
 var turn = 0;
 var salary = 10;
@@ -16,9 +16,9 @@ for (var n = 0; n < 6; ++n) {
   state[n] = 0;
 }
 
-var replaceau = new Audio('audio/replace.mp3');
-var meltau = new Audio('audio/melt.mp3');
-var coverau = new Audio('audio/coat.mp3');
+var replaceau = new Audio("audio/replace.mp3");
+var meltau = new Audio("audio/melt.mp3");
+var coverau = new Audio("audio/coat.mp3");
 //
 //the main idea for checking states is do a check every 5 seconds
 //the state array will store states for all pipes based on their index
@@ -36,39 +36,39 @@ $(document).ready(function () {
 
   $(".btn-primary").click(function () {
     leaking_frequency -= 1000;
-    if (leaking_frequency > 800 && leaking_frequency < 9000){
-        clearInterval(leakIntervalHandle);
-        leakIntervalHandle = setInterval(checkleaking, leaking_frequency);
-        $(".btn-warning").removeClass('disabled');
-      } else {
-        leaking_frequency +=1000;
-        $(this).addClass('disabled');
-      }
-    $('#leakingFreq').html(leaking_frequency/1000);
+    if (leaking_frequency > 800 && leaking_frequency < 9000) {
+      clearInterval(leakIntervalHandle);
+      leakIntervalHandle = setInterval(checkleaking, leaking_frequency);
+      $(".btn-warning").removeClass("disabled");
+    } else {
+      leaking_frequency += 1000;
+      $(this).addClass("disabled");
+    }
+    $("#leakingFreq").html(leaking_frequency / 1000);
   });
   $(".btn-warning").click(function () {
     leaking_frequency += 1000;
-    if (leaking_frequency > 800 && leaking_frequency < 9000){
+    if (leaking_frequency > 800 && leaking_frequency < 9000) {
       clearInterval(leakIntervalHandle);
       leakIntervalHandle = setInterval(checkleaking, leaking_frequency);
-      $(".btn-primary").removeClass('disabled');
+      $(".btn-primary").removeClass("disabled");
     } else {
-      leaking_frequency -=1000;
-      $(this).addClass('disabled');
+      leaking_frequency -= 1000;
+      $(this).addClass("disabled");
     }
-    $('#leakingFreq').html(leaking_frequency/1000);
+    $("#leakingFreq").html(leaking_frequency / 1000);
   });
   setInterval(function () {
     checkleaking();
   }, leaking_frequency);
 
-  $("#soundBtn").click(function() {
+  $("#soundBtn").click(function () {
     if (soundOn) {
-      soundOn = false; 
-      $("#soundBtn").html('Turn on sound effects');
-    } else{
-      soundOn = true; 
-      $("#soundBtn").html('Turn off sound effects');
+      soundOn = false;
+      $("#soundBtn").html("Turn on sound effects");
+    } else {
+      soundOn = true;
+      $("#soundBtn").html("Turn off sound effects");
     }
   });
 });
@@ -113,7 +113,7 @@ function checkleaking() {
   if (turn == 12 || turn == 24) {
     leaking += 0.1;
     salary += 5;
-    $("#salary").html(salary)
+    $("#salary").html(salary);
   }
 
   if (turn == 30) {
@@ -136,13 +136,13 @@ function checkleaking() {
         $("body").append(img);
         let leak = $("#leak" + idx);
         let tube = $("#pipe" + idx);
-   
+
         leak.css("position", "absolute");
         leak.css("height", 90);
-        left_pos = parseInt(tube.css("left")) + 60
+        left_pos = parseInt(tube.css("left")) + 60;
         leak.css("left", left_pos);
         top_pos = 360;
-        console.log(top_pos);
+        // console.log(top_pos);
         leak.css("top", top_pos);
 
         button_left = left_pos;
@@ -165,12 +165,12 @@ function checkleaking() {
       $("body").append(img);
       let ice = $("#smallice" + idx);
       let leak = $("#leak" + idx);
-      
+
       ice.css("position", "absolute");
-      left_pos = parseInt(leak.css("left"))
+      left_pos = parseInt(leak.css("left"));
       ice.css("left", left_pos);
       ice.css("top", 350);
-      
+
       ice.css("height", 85);
       ice.css("z-index", 90);
       document.getElementById("pipe" + idx + "_status").innerHTML =
@@ -211,26 +211,26 @@ function checkleaking() {
       state[idx - 1] = 5;
       let oldpipe = $("#pipe" + idx);
       let ice = $("#bigice" + idx);
-      oldpipe.css("position", "absolute");
-      ice.css("position", "absolute");
+      // oldpipe.css("position", "absolute");
+      // ice.css("position", "absolute");
       console.log(oldpipe);
       console.log(idx);
       left_pos = parseInt(oldpipe.css("left"));
-      console.log(left_pos);
-      ice.remove();
-      oldpipe.remove();
-      var img = createItemDivString(idx, "burstpipe", "brust.png");
-      $("body").append(img);
-
-      let newpipe = $("#burstpipe" + idx);
-      newpipe.css("position", "absolute");
-
-      // newpipe.css("left", left_pos);
       // console.log(left_pos);
-      newpipe.css("top",350);
+      ice.remove();
+      oldpipe.attr("src", "/asset/brust.png");
+      // var img = createItemDivString(idx, "burstpipe", "brust.png");
+      // $("body").append(img);
 
-      newpipe.css("left", idx * 120 -40);
-      newpipe.css("z-index", 60);
+      // let newpipe = $("#burstpipe" + idx);
+      // newpipe.css("position", "absolute");
+
+      // // newpipe.css("left", left_pos);
+      // // console.log(left_pos);
+      // newpipe.css("top",350);
+
+      // newpipe.css("left", idx * 120 -40);
+      // newpipe.css("z-index", 60);
       document.getElementById("pipe" + idx + "_status").innerHTML =
         "Pipe" + idx + "'s status: Bursted";
     }
@@ -307,7 +307,6 @@ function gameAction(actionID) {
     button_left = $("#" + actionID).offset().left;
     $("#actionPanel").css("left", button_left);
     $("#actionPanel").css("top", 280);
-
   }
 }
 
@@ -315,7 +314,10 @@ function actionReplace(actionID) {
   let actionPanel = $("#actionPanel");
   actionPanel.remove();
   actionPanelOpen = false;
-  if (soundOn){replaceau.play(); console.log('playing sound');}
+  if (soundOn) {
+    replaceau.play();
+    console.log("playing sound");
+  }
 
   let idx = actionID.charAt(actionID.length - 1);
   let type = actionID.charAt(0);
@@ -350,7 +352,9 @@ function actionCover(actionID) {
   let val1 = parseInt($("#money").html());
   val1 -= 10;
   $("#money").html(val1);
-  if (soundOn){coverau.play();}
+  if (soundOn) {
+    coverau.play();
+  }
 
   let actionPanel = $("#actionPanel");
   actionPanel.remove();
@@ -375,7 +379,9 @@ function actionCover(actionID) {
 }
 
 function actionMelt(actionID) {
-  if (soundOn){meltau.play();}
+  if (soundOn) {
+    meltau.play();
+  }
   let val1 = parseInt($("#money").html());
   val1 -= 5;
   $("#money").html(val1);
