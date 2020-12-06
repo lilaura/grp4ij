@@ -104,9 +104,9 @@ function getRandomNumber(min, max) {
 }
 
 function checkleaking() {
-  // if (parseInt($("#money").html()) <= 0) {
-  //   window.location.href = "gameover.html";
-  // }
+  if (parseInt($("#money").html()) <= 0) {
+    window.location.href = "gameover.html";
+  }
   let val1 = parseInt($("#money").html());
   val1 += salary;
   $("#money").html(val1);
@@ -120,6 +120,7 @@ function checkleaking() {
     window.location.href = "gamesucceed.html";
   }
   turn += 1;
+  $("#round").html(30 - turn);
   for (var idx = 1; idx < 7; idx++) {
     var change = false;
     var left = [83, 172, 262, 352, 444, 532];
@@ -224,11 +225,11 @@ function checkleaking() {
       let newpipe = $("#burstpipe" + idx);
       newpipe.css("position", "absolute");
 
-      newpipe.css("left", left_pos);
-      console.log(left_pos);
+      // newpipe.css("left", left_pos);
+      // console.log(left_pos);
       newpipe.css("top",350);
 
-      newpipe.css("left", left_pos);
+      newpipe.css("left", idx * 120 -40);
       newpipe.css("z-index", 60);
       document.getElementById("pipe" + idx + "_status").innerHTML =
         "Pipe" + idx + "'s status: Bursted";
